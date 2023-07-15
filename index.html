@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MCYeti</title>
+<meta charset="utf-8">
+<style>
+	/* Thanks to sebnukem at https://stackoverflow.com/a/14696457 */
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	.imgbox {
+		display: grid;
+		height: 100%;
+	}
+	.center-fit {
+		max-width: 100%;
+		max-height: 100vh;
+		margin: auto;
+	}
+
+	#footer-text {
+		font-family: Arial;
+		color: white;
+		position: absolute;
+		bottom: 2%;
+		left: 2%;
+	}
+	a:link, a:visited {
+		color: green;
+	}
+	#logo {
+		pointer-events: none;
+	}
+</style>
+<script>
+var transparency = 100.0;
+var fadeOutInderval;
+
+function updateTransparencyFor(element) {
+	// Thanks to stecb at https://stackoverflow.com/a/8517240
+	element.style.opacity = (transparency / 100.0).toString();
+	element.style.filter  = 'alpha(opacity=' + transparency.toString() + ')'; // IE fallback
+}
+function updateTransparency() {
+	updateTransparencyFor(document.getElementById('logo'));
+	updateTransparencyFor(document.getElementById('footer-text'));
+}
+
+function proccessFadeOut() {
+	transparency = Math.max(transparency - 0.8, 10);
+	updateTransparency();
+	if (transparency == 10) {
+		window.location.href = "https://github.com/yeti0904/MCYeti";
+		clearInterval(fadeOutInderval);
+	}
+}
+
+function startFadeOut() {
+	fadeOutInderval = setInterval(proccessFadeOut, 1000 / 60);
+}
+
+window.addEventListener('load', function () {
+	setTimeout(startFadeOut, 1000);
+});
+</script>
+</head>
+<body style="background-color: #303E4F">
+</body>
+<div class="imgbox">
+    <img class="center-fit" id="logo" src='https://github.com/yeti0904/MCYeti/blob/main/img/logo.png?raw=true'>
+</div>
+<p id="footer-text">&copy; yeti0904, LordOfTrident and deewend. You might also want to join <a href="https://mclord.ru/discord">The McLord Project Discord</a>.</p>
+</html>
